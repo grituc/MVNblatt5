@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>md.grituc</groupId>
+  <groupId>de.hfu</groupId>
   <artifactId>primerMvn</artifactId>
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
@@ -18,7 +18,7 @@
 			<archive>
 				<manifest>
 					<addClasspath>true</addClasspath>
-					<mainClass>md.grituc.App</mainClass>
+					<mainClass>de.hfu.App</mainClass>
 				</manifest>
 			</archive>
 		</configuration>
@@ -34,4 +34,14 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <reporting>
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-javadoc-plugin</artifactId>
+  		</plugin>
+  	</plugins>
+  </reporting>
+  
+  
 </project>

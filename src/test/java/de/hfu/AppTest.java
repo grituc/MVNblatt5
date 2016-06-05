@@ -1,4 +1,4 @@
-package md.grituc;
+package de.hfu;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

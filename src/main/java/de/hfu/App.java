@@ -1,8 +1,9 @@
-package md.grituc;
+package de.hfu; //md.grituc;
 import java.util.*;
 
-public class App {
-
+public class App { //this is an example-Class
+				   //testing Maven
+/*
 private static void smallToBig(String s1){
     for(char x:s1.toCharArray())
         if ('a' <= x && x <= 'z')
@@ -11,15 +12,16 @@ private static void smallToBig(String s1){
             System.out.print(x);
     System.out.println();
 }
+*/
 
 public static void main( String[] args ){
-    System.out.println( "Hello World!" );
-    Scanner sc = new Scanner(System.in); //Input from System.im
+    System.out.print("Ein String eingeben: ");
+    Scanner sc = new Scanner(System.in); //Input from System.in
     String s = sc.next();
     
-    App.smallToBig(s);  
-
+    s = s.toUpperCase();
+    System.out.println("Der neue String: " + s);
     System.out.println("Ausgabe fertig");
-
+    sc.close();
 }
 }
