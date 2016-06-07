@@ -21,15 +21,6 @@ public class Queue {
 	   queue[tail % maxqueuelength] = a; //why modulo? because tail can be equal or bigger than size 
    }
 
-/*
-   public void enqueue(int a){
-	   if((tail - head) < maxqueuelength -1 )
-		    tail = (tail + 1) % maxqueuelength;
-		
-	   queue[tail % maxqueuelength] = a; 
-   }
-*/
-
    public int dequeue(){
 	   if(tail < head){
 		    throw new IllegalStateException("dequeue on empty queue");
@@ -38,6 +29,4 @@ public class Queue {
    }
 
 }
-//Problem: full queue, element with index 0 removed, still enqueue() will write on the last position (index 2 if size of the queue is 3)
-//not a problem actually, this is the queue's specification!
-//Critic: tail and head might one day achieve the INT_MAX (from + to a negative number!) 
+//Critic: tail and head might one day achieve the INT_MAX (the value will jump from + to a negative number!) 
