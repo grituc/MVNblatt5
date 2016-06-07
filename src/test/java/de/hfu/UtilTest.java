@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 public class UtilTest {
 	@Test
 	public void testUtil_istErstesHalbjahr(){
-		//Util u = new Util();  //don't need it, the method to test is static
+		Util u = new Util();  //don't need it, the method to test is static. Update: DO need it in order to test constructor
 		final boolean expectedValue = true; //don't need either, may use assertTrue and assertFalse instead
 		assertEquals(expectedValue, Util.istErstesHalbjahr(5));
 		assertTrue(Util.istErstesHalbjahr(1));
