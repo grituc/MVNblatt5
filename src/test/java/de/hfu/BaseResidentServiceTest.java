@@ -17,17 +17,17 @@ public class BaseResidentServiceTest {
 	@Test
 	public void test1GetFilteredResidentsList(){
 		BaseResidentService rs = new BaseResidentService();
-		ResidentRepositoryStub rr = new ResidentRepositoryStub();
-		rs.setResidentRepository(rr);
+		ResidentRepositoryStub rrStub = new ResidentRepositoryStub();
+		rs.setResidentRepository(rrStub);
 	
 		Resident r1, r2, r3, r4;
 		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
 		r2 = new Resident("Daisie", "Duck", "Wilhelmstr. 11", "Furtwangen", null);
 		r3 = new Resident("George", "Martin", "Blumentstr. 11", "Villingen", null);
 
-		rr.addResident(r1);
-		rr.addResident(r2);
-		rr.addResident(r3);
+		rrStub.addResident(r1);
+		rrStub.addResident(r2);
+		rrStub.addResident(r3);
 		
 		r4 = new Resident(null, "Duck", null, null, null);
 
@@ -42,17 +42,17 @@ public class BaseResidentServiceTest {
 	@Test
 	public void test2GetFilteredResidentsList(){
 		BaseResidentService rs = new BaseResidentService();
-		ResidentRepositoryStub rr = new ResidentRepositoryStub();
-		rs.setResidentRepository(rr);	
+		ResidentRepositoryStub rrStub = new ResidentRepositoryStub();
+		rs.setResidentRepository(rrStub);	
 	
 		Resident r1, r2, r3, r4, r5;
 		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
 		r2 = new Resident("Daisie", "Martin", "Wilhelmstr. 11", "Furtwangen", null);
 		r3 = new Resident("George", "Martin", "Blumentstr. 11", "Villingen", null);
 
-		rr.addResident(r1);
-		rr.addResident(r2);
-		rr.addResident(r3);
+		rrStub.addResident(r1);
+		rrStub.addResident(r2);
+		rrStub.addResident(r3);
 		
 		r4 = new Resident("D*", null, null, null, null);
 		r5 = new Resident("Do*", null, null, null, null);
@@ -81,17 +81,17 @@ public class BaseResidentServiceTest {
 	@Test //die Klasse wirft keine Ausnahme
 	public void test3GetFilteredResidentsList(){
 		BaseResidentService rs = new BaseResidentService();
-		ResidentRepositoryStub rr = new ResidentRepositoryStub();
-		rs.setResidentRepository(rr);	
+		ResidentRepositoryStub rrStub = new ResidentRepositoryStub();
+		rs.setResidentRepository(rrStub);	
 	
 		Resident r1, r2, r3, r4, r5, r6;
 		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
 		r2 = new Resident("Daisie", "Martin", "Wilhelmstr. 11", "Furtwangen", null);
 		r3 = new Resident("George", "Martin", "Blumentstr. 11", "Villingen", null);
 
-		rr.addResident(r1);
-		rr.addResident(r2);
-		rr.addResident(r3);
+		rrStub.addResident(r1);
+		rrStub.addResident(r2);
+		rrStub.addResident(r3);
 		
 		ArrayList<Resident> testList = new ArrayList<Resident>();
 		testList.add(r1);
@@ -105,15 +105,15 @@ public class BaseResidentServiceTest {
 	@Test
 	public void test1GetUniqueResident() throws ResidentServiceException{
 		BaseResidentService rs = new BaseResidentService();
-		ResidentRepositoryStub rr = new ResidentRepositoryStub();
-		rs.setResidentRepository(rr);
+		ResidentRepositoryStub rrStub = new ResidentRepositoryStub();
+		rs.setResidentRepository(rrStub);
 		
 		Resident r1, r2, r3;
 		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
 		r2 = new Resident("Daisie", "Martin", "Wilhelmstr. 11", "Furtwangen", null);
 		
-		rr.addResident(r1);
-		rr.addResident(r2);
+		rrStub.addResident(r1);
+		rrStub.addResident(r2);
 		
 		assertSame(r1, rs.getUniqueResident(r1)); //Same staerker als Equals
 		assertEquals(r1, rs.getUniqueResident(r1));
@@ -133,8 +133,8 @@ public class BaseResidentServiceTest {
 
 	public void test2GetUniqueResident() throws ResidentServiceException{
 		BaseResidentService rs = new BaseResidentService();
-		ResidentRepositoryStub rr = new ResidentRepositoryStub();
-		rs.setResidentRepository(rr);
+		ResidentRepositoryStub rrStub = new ResidentRepositoryStub();
+		rs.setResidentRepository(rrStub);
 		
 		Resident r1, r2, r3;
 		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
@@ -150,8 +150,8 @@ public class BaseResidentServiceTest {
 	@Test(expected = ResidentServiceException.class)
 	public void test3GetUniqueResident() throws ResidentServiceException{ //why "throws..." ???
 		BaseResidentService rs = new BaseResidentService();
-		ResidentRepositoryStub rr = new ResidentRepositoryStub();
-		rs.setResidentRepository(rr);
+		ResidentRepositoryStub rrStub = new ResidentRepositoryStub();
+		rs.setResidentRepository(rrStub);
 		
 		Resident r1, r2, r3;
 		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
@@ -159,8 +159,8 @@ public class BaseResidentServiceTest {
 		
 		r3 = new Resident("*", "Martin", "Blumentstr. 11", "Villingen", null); //wird nicht im Repository gespeichert
 
-		rr.addResident(r1);
-		rr.addResident(r2);
+		rrStub.addResident(r1);
+		rrStub.addResident(r2);
 		rs.getUniqueResident(r3);
 		
 		/*
