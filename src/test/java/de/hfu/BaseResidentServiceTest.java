@@ -3,6 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import de.hfu.meldeauskunft.*;
 
+import java.awt.image.RescaleOp;
 import java.util.*;
 
 /*Integrationstest for the methods   
@@ -100,5 +101,72 @@ public class BaseResidentServiceTest {
 		assertEquals(testList, rs.getFilteredResidentsList(new Resident("*a*" , null, null, null, null)));
 
 	}
+	
+	@Test
+	public void test1GetUniqueResident() throws ResidentServiceException{
+		BaseResidentService rs = new BaseResidentService();
+		ResidentRepositoryStub rr = new ResidentRepositoryStub();
+		rs.setResidentRepository(rr);
+		
+		Resident r1, r2, r3;
+		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
+		r2 = new Resident("Daisie", "Martin", "Wilhelmstr. 11", "Furtwangen", null);
+		
+		rr.addResident(r1);
+		rr.addResident(r2);
+		
+		assertSame(r1, rs.getUniqueResident(r1)); //Same staerker als Equals
+		assertEquals(r1, rs.getUniqueResident(r1));
+		assertEquals(r1, rs.getUniqueResident(new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null)));
 
+
+		
+		assertEquals(r1, rs.getUniqueResident(new Resident("Donald", null, null, "Furtwangen", null)));
+		assertEquals(r1, rs.getUniqueResident(new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furt", null))); //soll nicht gehen, aber die Stadt ist ignoriert
+
+		assertNotEquals(r1, rs.getUniqueResident(r2));
+
+		
+	}
+
+	@Test(expected = ResidentServiceException.class)
+
+	public void test2GetUniqueResident() throws ResidentServiceException{
+		BaseResidentService rs = new BaseResidentService();
+		ResidentRepositoryStub rr = new ResidentRepositoryStub();
+		rs.setResidentRepository(rr);
+		
+		Resident r1, r2, r3;
+		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
+		r2 = new Resident("Daisie", "Duck", "Wilhelmstr. 11", "Furtwangen", null);
+		
+		r3 = new Resident(null, "Duck", null, null, null); //wird nicht im Repository gespeichert
+
+		rs.getUniqueResident(r3);
+
+		
+	}
+	
+	@Test(expected = ResidentServiceException.class)
+	public void test3GetUniqueResident() throws ResidentServiceException{ //why "throws..." ???
+		BaseResidentService rs = new BaseResidentService();
+		ResidentRepositoryStub rr = new ResidentRepositoryStub();
+		rs.setResidentRepository(rr);
+		
+		Resident r1, r2, r3;
+		r1 = new Resident("Donald", "Duck", "Grieshaberstr. 7", "Furtwangen", null);
+		r2 = new Resident("Daisie", "Martin", "Wilhelmstr. 11", "Furtwangen", null);
+		
+		r3 = new Resident("*", "Martin", "Blumentstr. 11", "Villingen", null); //wird nicht im Repository gespeichert
+
+		rr.addResident(r1);
+		rr.addResident(r2);
+		rs.getUniqueResident(r3);
+		
+		/*
+		try {
+			rs.getUniqueResident(r3);
+		} catch (ResidentServiceException e){throw new ResidentServiceException("ResServExc");}  //ResidentServiceException
+		*/
+	}
 }

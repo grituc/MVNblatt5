@@ -33,9 +33,13 @@ public class BaseResidentService implements ResidentService {
     List<Resident> residents = getFilteredResidentsList(filterResident);
     if (residents.size() == 1) {
       return residents.get(0);
-    } else {
+    } else
+    	 //if (residents.size() > 1 ){
       throw new ResidentServiceException("Suchanfrage lieferte kein eindeutiges Ergebnis!");
-    }
+    //}
+    	 //else
+    	//      throw new ResidentServiceException("Suchanfrage lieferte kein Ergebnis!");
+
   }
 
   /**
